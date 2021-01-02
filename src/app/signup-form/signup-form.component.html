@@ -1,0 +1,62 @@
+<form [formGroup]="form" #f = "ngForm" (ngSubmit)="login(f)">
+    <div *ngIf = "form.errors"class="alert alert-danger">Invalid credentials</div>
+    <div class="form-group">
+        <label for="username">Username</label>
+        <input 
+            id="username"
+            formControlName="username" 
+            type="text" 
+            class="form-control textbox"
+            (change)="onChange()">
+            <div *ngIf="username.pending">Checking username.....</div>
+            <div *ngIf="username.touched && username.invalid" class="alert alert-danger">
+                <div *ngIf="username.errors.required">Username is Required.</div>
+                <div *ngIf="username.errors.minlength">Minimum Length required is {{username.errors.minlength.requiredLength}}</div>
+                <div *ngIf="username.errors.shouldbeunique">Username already taken</div>
+            </div>
+
+    </div>
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input 
+            id="password" 
+            formControlName="password" 
+            type="text" 
+            class="form-control textbox"
+            (change)="onChange()">
+            <div *ngIf="password.touched && password.invalid" class="alert alert-danger">
+                <div *ngIf="password.errors.required">Username is Required.</div>
+                <div *ngIf="password.errors.blankSpace">No sapce allowed in password</div>
+            </div>
+    </div>
+    <div formGroupName = "account">
+        <div class="form-group">
+            <input
+             type="text"
+             id="accountnumber"
+             class="form-control textbox"
+             formControlName="accountnumber"
+            >
+            <div *ngIf="accountnumber.touched && accountnumber.invalid" class="alert alert-danger">Account Number Required</div>
+        </div>
+        
+    </div>
+    
+        <label>Enter list of modules</label>
+        <input
+             type="textbox" 
+             class="form-control textbox" 
+             (keyup.enter)="addModules(topic)" #topic>
+        <ul class = "list-group">
+            <li *ngFor="let m of modules.controls"
+                class="list-group-item"
+                 style="width: 20%;"
+                 (click)="removeTopic(m.value)"> {{m.value}}
+            </li>
+        </ul>
+    
+    <div>
+        <button class="btn btn-primary" type="submit">Sign Up</button>
+        
+    </div>
+</form>

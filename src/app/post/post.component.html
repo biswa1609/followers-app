@@ -1,0 +1,37 @@
+<p>post works!</p>
+
+<form [formGroup]="form" #f="ngForm">
+    
+<div *ngIf = "form.errors"class="alert alert-danger">
+    <div *ngIf = "form.errors.alreadyDeleted">Already Deleted</div>
+    <div *ngIf = "form.errors.invalidPost">Invalid  Post</div>
+</div>
+    <input 
+    type="text" 
+    class="form-control" 
+     #title
+     formControlName="title"
+     (keyup.enter)="onEnterClick(title)"
+     (change)="onChange()">
+    <div *ngIf = "_title.errors"class="alert alert-danger">
+        <div *ngIf="_title.errors.minlength">Required Length {{_title.errors.minlength.requiredLength}}</div>
+        <div *ngIf = "_title.errors.alreadyDeleted">Already Deleted</div>
+        <div *ngIf = "_title.errors.unexpectedError">Unexpected Error Occured</div>
+        
+    </div>
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Action</th>
+        </tr>
+        <tr *ngFor='let res of result'>
+            <td>{{res.id}}</td>
+            <td>{{res.title}}</td>
+            <td><button class="btn btn-default btn-sm"(click)="Update(res)">Update</button>
+                <button class="btn btn-default btn-sm"(click)="DeletePost(res)">Delete</button>
+                <button class="btn btn-default btn-sm"(click)="DeleteInvalidPost(res)">DeleteError</button>
+            </td>
+        </tr>
+    </table>
+</form>

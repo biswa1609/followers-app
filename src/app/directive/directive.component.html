@@ -1,0 +1,65 @@
+<p>directive works!</p>
+<!--If condition-->
+<div *ngIf ="courses.length > 0; then courseList else nocourse"></div>
+<ng-template #courseList>
+    <ul>
+        <li *ngFor="let course of courses">
+        <h4>{{course}}</h4>
+        </li>
+    </ul>
+</ng-template>
+<ng-template #nocourse>
+    <h4>No Course for display</h4>
+</ng-template>
+<!--switch case-->
+<div>
+    <ul class="nav nav-pills">
+        <li [class.active]="viewMode == 'map'"><a (click)="viewMode = 'map'">Map View</a></li>
+        <li [class.active]="viewMode == 'list'"><a (click)="viewMode = 'list'">List View</a></li>
+    </ul>
+    <div [ngSwitch] = "viewMode">
+        <div *ngSwitchCase = "'map'"> Map View active</div>
+        <div *ngSwitchCase = "'list'">List View active</div>
+    </div>
+</div>
+<!--ng For-->
+<div>
+    <table class="table">
+        <tr>
+            <th>#</th>
+            <th>Course</th>
+            <th>Action</th>
+        </tr>
+        <tr *ngFor="let course of subjects; index as i ; even as isEven">
+            <td>{{course.id}}</td>
+            <td>{{course.subject}}</td>
+            <td>
+                <button class="button button1" (click)="addCourse()">Add</button>
+                <button class="button button2" (click)="updateCourse(course)">Update</button>
+                <button class="button button3" (click)="deleteCourse(course)"> Delete</button>
+            </td>
+        </tr>
+        
+    </table>
+    <ng-template #even>
+        <tr style="background-color:#FF0000"></tr>
+    </ng-template>
+    <ng-template #odd>
+        <tr style="background-color:rgb(190, 169, 137)"></tr>
+    </ng-template>
+</div>
+<div>
+    <span 
+        class="glyphicon"
+        [ngClass]="{
+          'glyphicon-star': isSelected,
+          'glyphicon-star-empty':!isSelected
+        }"
+        (click) = "onClick()"
+        >
+    </span>
+</div>
+
+<div>
+    <input [appInputFormat]="'uppercase'">
+</div>

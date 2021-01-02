@@ -1,0 +1,13 @@
+.form-control.textbox
+{
+    width: 20%;
+}
+.form-control.ng-pristine.ng-invalid.ng-touched
+{
+    border: 2px solid red;
+}
+.alert.alert-danger
+{
+    width: 20%;
+    height: 10%;
+}

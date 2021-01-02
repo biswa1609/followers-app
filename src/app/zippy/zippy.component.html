@@ -1,0 +1,13 @@
+<p>zippy works!</p>
+<div class="panel panel-default">
+     <div class="panel-heading" (click)="onClick()"><span class="glyphicon"
+        [ngClass]="{
+            'glyphicon-chevron-up':isSelected,
+            'glyphicon-chevron-down':!isSelected
+        }"></span>
+    <ng-content select= ".heading"></ng-content>
+     </div>
+     <div class="panel-body" *ngIf = "isSelected">
+         <ng-content select= ".body"></ng-content>
+     </div>
+</div>

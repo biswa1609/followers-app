@@ -1,0 +1,50 @@
+<form #f="ngForm" (ngSubmit)="submit(f)">
+    <div ngModelGroup ="contact">
+        <div class="form-group">
+            <label for="firstname">First Name</label>
+            <input required [(ngModel)]="_firstName"
+                    minlength="5" 
+                    maxlength="10" 
+                    pattern="banana" 
+                    name="firstName" 
+                    #firstName = "ngModel"
+                    (change)="onChange(firstName)"
+                    type="text" class="form-control"
+                     id="firstname">
+                     
+            <div class="alert alert-danger" *ngIf="firstName.touched && !firstName.valid">
+                <div *ngIf="firstName.errors.required">First Name required</div>
+                <div *ngIf="firstName.errors?.minlength">Minimum {{firstName.errors?.minlength?.requiredLength}} letters required</div>
+                <div *ngIf="firstName.errors?.pattern">Not satisfying required pattern</div>
+            </div>
+        </div>
+        
+    </div>
+    
+    <div class="form-group">
+        <label for="comment">Comment</label>
+        <textarea id="comment" ngModel name = "Comment" cols="30" rows="10" class="form-control"></textarea>
+    </div>
+    <div class="form-group">
+        <input type="checkbox" ngModel name="isSelected" id="isSeleceted">
+        <label for="isSelected">Select the mailing address as Billing address</label>
+        
+    </div>   
+    <div class="form-group">
+        <label for="typeBilling">Type Billing</label>
+        <select ngModel name="typeBilling" id="typeBilling" class="form-control checkbox">
+            <option *ngFor = "let billing of _typeBilling" [value]="billing.id">{{billing.type}}</option>
+            
+        </select>
+        <select ngModel name="typeBilling2" id="typeBilling2" class="form-control checkbox">
+           <option *ngFor = "let billing of _typeBilling" [ngValue]="billing">{{billing.type}}</option>
+        </select>
+    </div>
+    <div *ngFor="let address of _addressType" class="form-group radio">
+        <label>
+            <input type="radio" ngModel name="addressType" [value] ="address.id"> {{address.type}}
+        </label>
+    </div>
+    <p>{{ f.value|json }}</p>
+    <button id="submit" class="btn btn-primary"[disabled]="!f.valid">Submit</button>
+</form>

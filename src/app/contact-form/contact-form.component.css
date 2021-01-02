@@ -1,0 +1,9 @@
+
+.form-control.ng-invalid.ng-touched
+{
+    border: 2px solid red;
+}
+.form-control.checkbox
+{
+    width: 50%;
+}
